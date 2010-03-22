@@ -37,7 +37,7 @@ import javax.swing.JFrame
 import javax.swing.JTree
 import javax.swing.tree.DefaultTreeCellRenderer
 import com.ocpsoft.pretty.time.PrettyTime
-import org.mnode.figurate.FileComparator
+import org.mnode.base.commons.FileComparator
 import org.mnode.base.desktop.PaddedIcon
 
 /*

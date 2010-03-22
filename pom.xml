@@ -264,9 +264,14 @@
 			<version>1.0.5</version>
 		</dependency>
 		<dependency>
-			<groupId>org.mnode.figurate</groupId>
-			<artifactId>figurate</artifactId>
+			<groupId>org.mnode.base</groupId>
+			<artifactId>base-commons</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>net.java.dev.substance</groupId>
+			<artifactId>swingx</artifactId>
+			<version>5.3</version>
 		</dependency>
   </dependencies>
 </project>
