@@ -1,0 +1,272 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.mnode.rebound</groupId>
+  <artifactId>rebound</artifactId>
+  <name>Rebound</name>
+  <version>0.0.1-SNAPSHOT</version>
+  <description>A file management tool</description>
+  <url>http://basetools.org/rebound</url>
+  <parent>
+  	<artifactId>base-parent</artifactId>
+  	<groupId>org.mnode.base</groupId>
+  	<version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <scm>
+  	<connection>scm:svn:http://svn.mnode.org/base/rebound/trunk</connection>
+  	<developerConnection>scm:svn:http://svn.mnode.org/base/rebound/trunk</developerConnection>
+  </scm>
+ 	<repositories>
+		<repository>
+			<id>modularity-releases</id>
+			<name>Modularity Releases</name>
+			<url>http://m2.modularity.net.au/releases</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+ 	</repositories> 
+ 	
+	<build>
+		<plugins>
+
+            <plugin>
+                <groupId>org.codehaus.gmaven</groupId>
+                <artifactId>gmaven-plugin</artifactId>
+                <version>1.2</version>
+                <configuration> 
+			        <providerSelection>1.7</providerSelection> 
+			      </configuration> 
+                <dependencies>
+					<dependency>
+						<groupId>org.codehaus.gmaven.runtime</groupId>
+						<artifactId>gmaven-runtime-1.7</artifactId>
+						<version>1.2</version>
+						<exclusions>
+			              <exclusion>
+			                <groupId>org.codehaus.groovy</groupId>
+			                <artifactId>groovy-all</artifactId>
+			              </exclusion>
+			            </exclusions>
+		          </dependency>
+		          <dependency>
+		            <groupId>org.codehaus.groovy</groupId>
+		            <artifactId>groovy-all</artifactId>
+		            <version>1.7.1</version>
+		          </dependency>
+				</dependencies>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generateStubs</goal>
+                            <goal>compile</goal>
+                            <goal>generateTestStubs</goal>
+                            <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+		
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<SplashScreen-Image>splash.png</SplashScreen-Image>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo.webstart
+				</groupId>
+				<artifactId>webstart-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>jnlp</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<!--outputDirectory></outputDirectory--> <!-- not required?? -->
+					<!--
+						Set to true to exclude all transitive dependencies. Default is
+						false.
+					-->
+					<excludeTransitive>false</excludeTransitive>
+					<!--
+						The path where the libraries are stored within the jnlp structure.
+						not required. by default the libraries are within the working
+						directory
+					-->
+					<libPath>lib</libPath>
+					<!--
+						[optional] transitive dependencies filter - if omitted, all
+						transitive dependencies are included
+					-->
+					<dependencies>
+						<!--
+							Note that only groupId and artifactId must be specified here.
+							because of a limitation of the Include/ExcludesArtifactFilter
+						-->
+						<!--
+							<includes> <include>net.modularity.core:desktop</include>
+							<include>net.modularity.core:xmpp</include>
+							<include>net.modularity.core:mail</include>
+							<include>net.modularity.core:calendar</include>
+							<include>net.modularity.core:logging</include>
+							<include>commons-lang:commons-lang</include> </includes>
+						-->
+						<!--
+							excludes> <exclude></exclude> <excludes
+						-->
+					</dependencies>
+
+					<resourcesDirectory>${project.basedir}/src/main/jnlp/resources</resourcesDirectory>
+
+					<!-- default value -->
+
+					<!-- JNLP generation -->
+					<jnlp>
+						<!-- default values -->
+						<!--
+							inputTemplateResourcePath>${project.basedir}</inputTemplateResourcePath
+						-->
+						<!--inputTemplate>src/main/jnlp/template.vm</inputTemplate--> <!-- relative to inputTemplateResourcePath -->
+						<!-- defaults to launch.jnlp -->
+						<!-- 
+						<outputFile>views.jnlp</outputFile>
+						 -->
+						<!--
+							used to automatically identify the jar containing the main class.
+						-->
+						<!-- this is perhaps going to change -->
+						<mainClass>org.mnode.rebound.Rebound</mainClass>
+					</jnlp>
+
+
+					<!-- SIGNING -->
+					<!--
+						defining this will automatically sign the jar and its
+						dependencies, if necessary
+					-->
+					<sign>
+						<keystore>micronode</keystore>
+						<keypass>!modular1</keypass>
+						<!--
+							we need to override passwords easily from the command line.
+							${keypass}
+						-->
+						<storepass>!modular1</storepass> <!-- ${storepass} -->
+						<!--storetype>fillme</storetype-->
+						<alias>webstart</alias>
+
+						<!-- only required for generating the keystore -->
+						<storetype>jks</storetype>
+						<validity>365</validity>
+						<dnameCn>Ben Fortuna</dnameCn>
+						<dnameOu>Rebound</dnameOu>
+						<dnameO>Micronode</dnameO>
+						<dnameL>Melbourne</dnameL>
+						<dnameSt>Victoria</dnameSt>
+						<dnameC>AU</dnameC>
+						<verify>true</verify> <!-- verify that the signing operation succeeded -->
+
+						<!-- KEYSTORE MANAGEMENT -->
+						<keystoreConfig>
+							<delete>true</delete> <!-- delete the keystore -->
+							<gen>true</gen>       <!-- optional shortcut to generate the store. -->
+						</keystoreConfig>
+					</sign>
+					<unsignAlreadySignedJars>true</unsignAlreadySignedJars>
+
+					<!-- BUILDING PROCESS -->
+					<pack200>true</pack200>
+					<gzip>true</gzip> <!-- default force when pack200 false, true when pack200 selected ?? -->
+					<!--
+						causes a version attribute to be output in each jar resource
+						element, optional, default is false
+					-->
+					<!-- 
+					<outputJarVersions>true</outputJarVersions>
+					 -->
+
+					<!--install>false</install--> <!-- not yet supported -->
+					<verbose>true</verbose>
+				</configuration>
+			</plugin>
+
+			<!-- Deploy webstart -->
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>deploy</phase>
+						<configuration>
+							<tasks>
+								<scp file="target/${pom.build.finalName}.zip"
+									todir="modularity@mnode.org:basetools.org/rebound"
+									keyfile="${user.home}/.ssh/id_rsa" passphrase="" />
+
+								<sshexec host="mnode.org" username="modularity"
+									keyfile="${user.home}/.ssh/id_rsa" passphrase=""
+									command="rm -rf basetools.org/rebound/webstart/*; unzip -o basetools.org/rebound/${pom.build.finalName}.zip -d basetools.org/rebound/webstart" />
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.ant</groupId>
+						<artifactId>ant-jsch</artifactId>
+						<version>1.7.1</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+	
+  <dependencies>
+  	<dependency>
+  		<groupId>org.codehaus.groovy</groupId>
+  		<artifactId>groovy-all</artifactId>
+  		<version>1.7.1</version>
+  	</dependency>
+		<dependency>
+			<groupId>org.codehaus.griffon.swingxbuilder</groupId>
+			<artifactId>swingxbuilder</artifactId>
+			<version>0.1.6</version>
+		</dependency>
+		<dependency>
+			<groupId>net.java.dev.substance</groupId>
+			<artifactId>substance</artifactId>
+			<version>5.3</version>
+		</dependency>
+		<dependency>
+			<groupId>net.java.dev.substance</groupId>
+			<artifactId>substance-swingx</artifactId>
+			<version>5.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mnode.base</groupId>
+			<artifactId>base-desktop</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ocpsoft</groupId>
+			<artifactId>ocpsoft-pretty-time</artifactId>
+			<version>1.0.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mnode.figurate</groupId>
+			<artifactId>figurate</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+  </dependencies>
+</project>
