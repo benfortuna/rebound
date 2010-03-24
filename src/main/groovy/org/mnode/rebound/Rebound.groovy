@@ -1,5 +1,6 @@
 /**
- * This file is part of Base Modules.
+
+* This file is part of Base Modules.
  *
  * Copyright (c) 2010, Ben Fortuna [fortuna@micronode.com]
  *
@@ -39,10 +40,9 @@ import javax.swing.tree.DefaultTreeCellRenderer
 import com.ocpsoft.pretty.time.PrettyTime
 import org.mnode.base.commons.FileComparator
 import org.mnode.base.desktop.PaddedIcon
-
 /*
 @Grapes([
-    @Grab(group='org.mnode.figurate', module='figurate', version='0.0.1-SNAPSHOT'),
+    @Grab(group='org.mnode.base', module='base-commons', version='0.0.1-SNAPSHOT'),
     @Grab(group='com.ocpsoft', module='ocpsoft-pretty-time', version='1.0.5'),
     @Grab(group='org.apache.xmlgraphics', module='batik-awt-util', version='1.7'),
 //    @Grab(group='org.apache.xmlgraphics', module='batik-swing', version='1.7'),
