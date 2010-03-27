@@ -242,6 +242,7 @@
 			<groupId>org.codehaus.griffon.swingxbuilder</groupId>
 			<artifactId>swingxbuilder</artifactId>
 			<version>0.1.6</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>net.java.dev.substance</groupId>
@@ -262,6 +263,7 @@
 			<groupId>com.ocpsoft</groupId>
 			<artifactId>ocpsoft-pretty-time</artifactId>
 			<version>1.0.5</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.mnode.base</groupId>
@@ -272,11 +274,13 @@
 			<groupId>net.java.dev.substance</groupId>
 			<artifactId>swingx</artifactId>
 			<version>5.3</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>swingx</groupId>
 			<artifactId>swingx-beaninfo</artifactId>
 			<version>0.9.5</version>
+			<scope>provided</scope>
 		</dependency>
   </dependencies>
 </project>
