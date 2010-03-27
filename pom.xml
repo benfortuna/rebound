@@ -248,11 +248,13 @@
 			<groupId>net.java.dev.substance</groupId>
 			<artifactId>substance</artifactId>
 			<version>5.3</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>net.java.dev.substance</groupId>
 			<artifactId>substance-swingx</artifactId>
 			<version>5.3</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.mnode.base</groupId>
@@ -281,6 +283,11 @@
 			<artifactId>swingx-beaninfo</artifactId>
 			<version>0.9.5</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mnode.base</groupId>
+			<artifactId>base-substance</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
   </dependencies>
 </project>
